@@ -5,7 +5,6 @@
     if (is_not_logged_in()) {
         redirect_to('page_login.php');
     }
-
     $users = get_all_users();
 ?>
 <!DOCTYPE html>
@@ -44,11 +43,7 @@
         </nav>
 
         <main id="js-page-content" role="main" class="page-content mt-3">
-            <?if (isset($_SESSION['success'])):?>
-            <div class="alert alert-success">
-                Профиль успешно обновлен.
-            </div>
-            <? endif;?>
+            <? display_flash_message('success') ?>
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -57,7 +52,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <? if(is_admin()):?>
-                    <a class="btn btn-success" href="create_user.html">Добавить</a>
+                    <a class="btn btn-success" href="create_user.php">Добавить</a>
                     <? endif;?>
                     <div class="border-faded bg-faded p-3 mb-g d-flex mt-3">
                         <input type="text" id="js-filter-contacts" name="filter-contacts" class="form-control shadow-inset-2 form-control-lg" placeholder="Найти пользователя">

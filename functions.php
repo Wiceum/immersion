@@ -26,7 +26,7 @@
                 'password' => password_hash($password, PASSWORD_DEFAULT)
             ]
         );
-    };
+    }; //№5 сделать return int $id
     function display_flash_message($name) : void {
         if(isset($_SESSION[$name])) {
             echo "<div class=\"alert alert-{$name} text-dark\" role=\"alert\">{$_SESSION[$name]}</div>";
@@ -35,14 +35,25 @@
     };
 
     // задание №3 авторизация
-    function login($email, $password) : bool {
+    function login($email, $password) : void {
         $user = get_user_by_email($email);
-        if ($email === $user['email'] && password_verify($password, $user['password'])) {
-            $_SESSION['email'] = $email;
-            return true;
-        } else {
-            return false;
+
+        //проверка существования пользователя
+        if(!$user){
+            set_flash_message('danger','Неверно введен логин!');
+        //    redirect_to('page_login.php');
         }
+
+        //проверка НЕкорректности пароля
+        if(!password_verify($password, $user['password'])) {
+            set_flash_message('danger','Неверно введен пароль!');
+            redirect_to('page_login.php');
+        }
+
+        // сама авторизация
+        $_SESSION['email'] = $email;
+        set_flash_message('success','Авторизация выполнена успешно!');
+        redirect_to('users.php');
     };
 
     //задание №4 список пользователей
