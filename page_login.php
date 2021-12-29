@@ -2,6 +2,7 @@
     error_reporting(-1);
     session_start();
     require_once ('functions.php');
+    var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">

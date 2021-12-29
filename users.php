@@ -105,7 +105,7 @@
                                         </a>
                                     </div>
                                     <? endif;?>
-                                    <span class="text-truncate text-truncate-xl"><?=$user['job']?></span>
+                                    <span class="text-truncate text-truncate-xl"><?=$user['job_title']?></span>
                                 </div>
                                 <button class="js-expand-btn btn btn-sm btn-default d-none" data-toggle="collapse" data-target="#c_1 > .card-body + .card-body" aria-expanded="false">
                                     <span class="collapsed-hidden">+</span>
@@ -123,13 +123,13 @@
                                     <i class="fas fa-map-pin mr-2"></i><?=$user['address']?></address>
                                 <div class="d-flex flex-row">
                                     <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
-                                        <i class="fab fa-vk"></i>
+                                        <i class="fab fa-vk"><?=$user['vk']?></i>
                                     </a>
                                     <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
-                                        <i class="fab fa-telegram"></i>
+                                        <i class="fab fa-telegram"><?=$user['telegram']?></i>
                                     </a>
                                     <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
-                                        <i class="fab fa-instagram"></i>
+                                        <i class="fab fa-instagram"><?=$user['instagram']?></i>
                                     </a>
                                 </div>
                             </div>

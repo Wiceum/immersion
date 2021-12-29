@@ -16,7 +16,7 @@
         header('Location: '.$path);
         exit;
     };
-    function add_user($email, $password) : void {
+    function add_user($email, $password) : int {
         $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
 
         $sql = "INSERT INTO users (email, password) VALUES (:email, :password)";
@@ -26,6 +26,11 @@
                 'password' => password_hash($password, PASSWORD_DEFAULT)
             ]
         );
+        $sql = "SELECT * FROM users ORDER BY id DESC";
+        $statement = $db->prepare($sql);
+        $statement->execute();
+        $user = $statement->fetch();
+        return $user['id'];
     }; //№5 сделать return int $id
     function display_flash_message($name) : void {
         if(isset($_SESSION[$name])) {
@@ -77,3 +82,54 @@
         $users = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $users;
     }
+
+    //задание №5 добавить пользователя
+    function edit_information($username, $job_title, $phone_number, $address, $id) {
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
+        $sql = "UPDATE users SET name = :username, job_title = :job_title, phone_number = :phone_number, address = :address
+                WHERE id = :id";
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'username' => $username,
+            'job_title' => $job_title,
+            'phone_number' => $phone_number,
+            'address'  => $address,
+            'id' => $id
+        ]);
+    };
+    function set_status($status, $id) {
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
+        $sql = "UPDATE users SET status = :status WHERE id = :id ";
+        $statement = $db->prepare($sql);
+        $statement->execute(['status' => $status, 'id' => $id]);
+    };
+    function upload_avatar($image, $id) {
+        $name = $image['name'];
+        $extension = pathinfo($name, PATHINFO_EXTENSION);
+        $filename = uniqid() . '.' . $extension;
+        $from = $image['tmp_name'];
+        $to = 'img/demo/avatars/' . $filename;
+
+        $result = move_uploaded_file($from, $to);
+        var_dump($result);
+
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion', 'root', '');
+        $sql = "UPDATE users SET avatar = :avatar WHERE id = :id";
+        $statement = $db->prepare($sql);
+        $statement->execute(['avatar' => $filename, 'id' => $id]);
+
+    };
+    function add_social_links ($id) :void {
+        $vk = $_POST['vk'];
+        $telegram = $_POST['telegram'];
+        $instagram = $_POST['instagram'];
+
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
+        $sql = "UPDATE users SET vk = :vk, telegram = :telegram, instagram = :instagram WHERE id = :id ";
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'vk' => $vk,
+            'telegram' => $telegram,
+            'instagram' => $instagram,
+            'id' => $id]);
+    };
