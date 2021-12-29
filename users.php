@@ -44,6 +44,7 @@
 
         <main id="js-page-content" role="main" class="page-content mt-3">
             <? display_flash_message('success') ?>
+            <? display_flash_message('danger');?>
             <div class="subheader">
                 <h1 class="subheader-title">
                     <i class='subheader-icon fal fa-users'></i> Список пользователей
@@ -86,16 +87,16 @@
                                     </a>
                                     <? if (is_admin()):?>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="edit.php?<?=$user['id']?>">
+                                        <a class="dropdown-item" href="edit.php?edit_user_id=<?=$user['id']?>">
                                             <i class="fa fa-edit"></i>
                                         Редактировать</a>
-                                        <a class="dropdown-item" href="security.php?<?=$user['id']?>">
+                                        <a class="dropdown-item" href="security.php?user_id=<?=$user['id']?>">
                                             <i class="fa fa-lock"></i>
                                         Безопасность</a>
-                                        <a class="dropdown-item" href="status.php?<?=$user['id']?>">
+                                        <a class="dropdown-item" href="status.php?user_id=<?=$user['id']?>">
                                             <i class="fa fa-sun"></i>
                                         Установить статус</a>
-                                        <a class="dropdown-item" href="media.php?<?=$user['id']?>">
+                                        <a class="dropdown-item" href="media.php?user_id=<?=$user['id']?>">
                                             <i class="fa fa-camera"></i>
                                             Загрузить аватар
                                         </a>

@@ -31,7 +31,7 @@
         $statement->execute();
         $user = $statement->fetch();
         return $user['id'];
-    }; //№5 сделать return int $id
+    };
     function display_flash_message($name) : void {
         if(isset($_SESSION[$name])) {
             echo "<div class=\"alert alert-{$name} text-dark\" role=\"alert\">{$_SESSION[$name]}</div>";
@@ -57,6 +57,7 @@
 
         // сама авторизация
         $_SESSION['email'] = $email;
+        $_SESSION['id'] = $user['id'];
         set_flash_message('success','Авторизация выполнена успешно!');
         redirect_to('users.php');
     };
@@ -133,3 +134,20 @@
             'instagram' => $instagram,
             'id' => $id]);
     };
+
+    //задание №6 редактировать пользователя
+    function is_author($logged_user_id, $edit_user_id) : bool {
+        if ($logged_user_id === $edit_user_id)
+        { return true;} else return false;
+    };
+    function get_user_by_id($id) : array {
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
+
+        $sql = "SELECT * FROM users WHERE id=:id";
+        $statement = $db->prepare($sql);
+        $statement->execute(['id' => $id]);
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+        return $user;
+    };
+    // использовал функцию из 5го задания
+    //function edit_info($user_id, $username, $job_title, $phone, $address) : void  {};
