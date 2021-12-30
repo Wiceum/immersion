@@ -71,7 +71,7 @@
             <div class="row" id="js-contacts">
                 <? foreach ($users as $user): ?>
                 <div class="col-xl-4">
-                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="<?=$user['tag']?>">
+                    <div id="c_1" class="card border shadow-0 mb-g shadow-sm-hover" data-filter-tags="<?=$user['filter_tag']?>">
                         <div class="card-body border-faded border-top-0 border-left-0 border-right-0 rounded-top">
                             <div class="d-flex flex-row align-items-center">
                                 <span class="status status-<?=$user['status']?> mr-3">
@@ -79,12 +79,13 @@
                                 </span>
                                 <div class="info-card-text flex-1">
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
-                                        <?=$user['name']?>
+                                       <?=$user['name']?>
                                         <? if (is_admin()): ?>
                                             <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
                                             <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
                                         <? endif;?>
                                     </a>
+                                    <a href="page_profile.php?profile_id=<?=$user['id']?>">Show Profile</a>
                                     <? if (is_admin()):?>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="edit.php?edit_user_id=<?=$user['id']?>">
@@ -122,15 +123,18 @@
                                     <i class="fas fa-mouse-pointer text-muted mr-2"></i><?=$user['email']?></a>
                                 <address class="fs-sm fw-400 mt-4 text-muted">
                                     <i class="fas fa-map-pin mr-2"></i><?=$user['address']?></address>
+
+                                <!-- не понимаю как правильно выводить ссылки на соцсети -->
+
                                 <div class="d-flex flex-row">
                                     <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#4680C2">
-                                        <i class="fab fa-vk"><?=$user['vk']?></i>
+                                        <i class="fab fa-vk"></i><?=$user['vk']?>
                                     </a>
                                     <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#38A1F3">
-                                        <i class="fab fa-telegram"><?=$user['telegram']?></i>
+                                        <i class="fab fa-telegram"></i><?=$user['telegram']?>
                                     </a>
                                     <a href="javascript:void(0);" class="mr-2 fs-xxl" style="color:#E1306C">
-                                        <i class="fab fa-instagram"><?=$user['instagram']?></i>
+                                        <i class="fab fa-instagram"></i><?=$user['instagram']?>
                                     </a>
                                 </div>
                             </div>
