@@ -80,13 +80,10 @@
                                 <div class="info-card-text flex-1">
                                     <a href="javascript:void(0);" class="fs-xl text-truncate text-truncate-lg text-info" data-toggle="dropdown" aria-expanded="false">
                                        <?=$user['name']?>
-                                        <? if (is_admin()): ?>
                                             <i class="fal fas fa-cog fa-fw d-inline-block ml-1 fs-md"></i>
                                             <i class="fal fa-angle-down d-inline-block ml-1 fs-md"></i>
-                                        <? endif;?>
                                     </a>
                                     <a href="page_profile.php?profile_id=<?=$user['id']?>">Show Profile</a>
-                                    <? if (is_admin()):?>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="edit.php?edit_user_id=<?=$user['id']?>">
                                             <i class="fa fa-edit"></i>
@@ -106,7 +103,6 @@
                                             Удалить
                                         </a>
                                     </div>
-                                    <? endif;?>
                                     <span class="text-truncate text-truncate-xl"><?=$user['job_title']?></span>
                                 </div>
                                 <button class="js-expand-btn btn btn-sm btn-default d-none" data-toggle="collapse" data-target="#c_1 > .card-body + .card-body" aria-expanded="false">

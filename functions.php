@@ -1,6 +1,6 @@
 <?php
 
-    function get_user_by_email($email) {
+    function get_user_by_email($email) { // array | false
         $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
 
         $sql = "SELECT * FROM users WHERE email=:email";
@@ -140,7 +140,7 @@
         if ($logged_user_id === $edit_user_id)
         { return true;} else return false;
     };
-    function get_user_by_id($id) : array {
+    function get_user_by_id($id)  {
         $db = new PDO('mysql:host=localhost;dbname=marlin_immersion','root','');
 
         $sql = "SELECT * FROM users WHERE id=:id";
@@ -148,6 +148,21 @@
         $statement->execute(['id' => $id]);
         $user = $statement->fetch(PDO::FETCH_ASSOC);
         return $user;
-    };
+    }; // array | false
     // использовал функцию из 5го задания
     //function edit_info($user_id, $username, $job_title, $phone, $address) : void  {};
+
+    //задание №8 авторизационные данные
+    function edit_credentials($user_id, $email, $password){
+        
+        $password = password_hash($password, PASSWORD_DEFAULT);
+
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion', 'root', '');
+        $sql = "UPDATE users SET email = :email, password = :password WHERE id = :user_id";
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'email' => $email,
+            'password' => $password,
+            'user_id' => $user_id
+        ]);
+    }
