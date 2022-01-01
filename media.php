@@ -79,10 +79,8 @@
                                 </div>
 
                                 <input hidden name="user_id" value="<?=$user['id']?>">
-<<<<<<< HEAD
                                 <input hidden name="current_avatar" value="<?=$user['avatar']?>">
-=======
->>>>>>> origin/master
+
 
                                 <div class="form-group">
                                     <label class="form-label" for="example-fileinput">Выберите аватар</label>

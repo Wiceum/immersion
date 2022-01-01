@@ -5,12 +5,11 @@
     $user_id = $_POST['user_id'];
     $image = $_FILES['avatar'];
 
-<<<<<<< HEAD
+
     $current_avatar = $_POST['current_avatar'];
     unlink('img/demo/avatars/'.$current_avatar);
 
-=======
->>>>>>> origin/master
+
     upload_avatar($image, $user_id);
 
     set_flash_message('success', 'Профиль успешно обновлен!');
