@@ -165,4 +165,17 @@
             'password' => $password,
             'user_id' => $user_id
         ]);
-    }
+    };
+
+    //задание №11 удаление пользователя
+    function delete_user($user_id) {
+        $db = new PDO('mysql:host=localhost;dbname=marlin_immersion', 'root', '');
+        $sql = "DELETE FROM users WHERE id = :user_id";
+        $statement = $db->prepare($sql);
+        $statement->execute([
+            'user_id' => $user_id
+        ]);
+    };
+    function logout() {
+        unset($_SESSION['email'], $_SESSION['id']);
+    };
